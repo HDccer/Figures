@@ -25,3 +25,15 @@ ggplot(Oxboys,aes(Occasion,height))+
   geom_line(aes(group=Subject),alpha=0.6)+
   geom_boxplot()
 
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() + 
+  ggforce::geom_mark_ellipse(aes(label = cyl, group = cyl))
+
+ggplot(mpg, aes(displ, hwy, colour = factor(cyl))) +
+  geom_point() + 
+  gghighlight::gghighlight() + 
+  facet_wrap(vars(cyl))
+
+
+
+
