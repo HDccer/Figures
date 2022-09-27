@@ -35,5 +35,33 @@ ggplot(mpg, aes(displ, hwy, colour = factor(cyl))) +
   facet_wrap(vars(cyl))
 
 
+p1 <- ggplot(mpg)+
+  geom_point(aes(displ,hwy))
+
+p2 <- ggplot(mpg)+
+  geom_bar(aes(x=as.character(year),fill=drv),position="dodge")+
+             labs(x="year")
 
 
+p3 <- ggplot(mpg)+
+  geom_density(aes(x = hwy,fill=drv))+
+  facet_grid(rows = vars(drv))
+  
+
+p4 <- ggplot(mpg,aes(x = drv,y=hwy))+
+  stat_summary(aes(x = drv, y = hwy, fill = drv), geom = "col", fun.data = mean_se) +
+  stat_summary(aes(x = drv, y = hwy), geom = "errorbar", fun.data = mean_se, width = 0.5)
+ 
+
+p1 + p2 + p3 + p4+plot_layout(guides="collect")
+
+p12 <- p1+inset_element(p2,left=0.5,right=0.9,top=0.9,bottom = 0.5)
+p12&theme_bw()
+library(patchwork)
+
+
+
+
+
+
+p1+p2
