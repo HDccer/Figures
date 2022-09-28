@@ -9,6 +9,11 @@ install.packages(c(
 ))
 
 library(ggplot2)
+library(patchwork)
+
+
+
+
 ggplot(mpg,aes(displ,hwy))+
   geom_point()
 ggplot(economics,aes(date,unemploy/pop))+
@@ -57,11 +62,13 @@ p1 + p2 + p3 + p4+plot_layout(guides="collect")
 
 p12 <- p1+inset_element(p2,left=0.5,right=0.9,top=0.9,bottom = 0.5)
 p12&theme_bw()
-library(patchwork)
 
 
+base <- ggplot(mpg,aes(drv,hwy))+
+  geom_hline(yintercept = 28,color = "blue")+
+  geom_boxplot()+theme_bw()
 
-
+base+coord_cartesian(ylim=c(10,35))
 
 
 p1+p2
