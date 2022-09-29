@@ -72,3 +72,17 @@ base+coord_cartesian(ylim=c(10,35))
 
 
 p1+p2
+
+ggplot(mpg,aes(x = displ,y=hwy))+
+  geom_point()+
+  geom_smooth(aes(color = "red"),method = "lm",se=FALSE)+
+  geom_smooth(aes(color = "green"),method = "loess",se=FALSE)+
+  labs(color = "Method")
+
+ggplot(mpg,aes(trans,cty))+
+  geom_point()+
+  geom_point(stat="summary",fun="mean",color = "red",size=4)
+  
+ggplot(diamonds, aes(price, colour = cut)) + 
+  geom_freqpoly(aes(y = after_stat(density)), binwidth = 500) + 
+  theme(legend.position = "none")
